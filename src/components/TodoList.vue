@@ -1,14 +1,14 @@
 <template>
   <div>
-    <ul>
-        <li v-for="(todoItem, index) in propsdata" :key="todoItem.item" class="shadow">
-          <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
-          <span :class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
-          <span class="removeBtn" @click="removeTodo(todoItem, index)">
-            <i class="fas fa-trash-alt"></i>
-          </span>
-        </li>
-    </ul>
+    <TransitionGroup name="list" tag="ul">
+      <li v-for="(todoItem, index) in propsdata" :key="todoItem.item" class="shadow">
+        <i class="fas fa-check checkBtn" :class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
+        <span :class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
+        <span class="removeBtn" @click="removeTodo(todoItem, index)">
+          <i class="fas fa-trash-alt"></i>
+        </span>
+      </li>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -58,5 +58,16 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #DE4343;
+}
+
+/* 리스트 아이템 트랜지션 효과 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
